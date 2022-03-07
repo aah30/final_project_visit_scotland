@@ -1,0 +1,51 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+ 
+```{r}
+library(tidyverse)
+library(here)
+library(janitor)
+```
+ 
+ 
+ 
+```{r}
+regional_domestic <- read_csv(here("data/regional_domestic_tourism.csv"))
+accomodation <- read_csv(here("data/scottish_accomodation_occupancy.csv"))
+activities <- read_csv(here("data/tourism_day_visits_activities.csv"))
+transport <- read_csv(here("data/tourism_day_visits_transport.csv"))
+location <- read_csv(here("data/tourism_day_visits_location.csv"))
+demographics <- read_csv(here("data/tourism_day_visits_demographics.csv"))
+```
+ 
+ 
+# check if any NA
+```{r}
+activities %>% 
+   summarise(across(.cols = everything(),
+                   .fns = ~sum(is.na(.x))))
+```
+ 
+ 
+```{r}
+clean_activities <- activities %>% 
+  clean_names() %>% 
+  rename(year = date_code ) %>% 
+  select(-feature_code, -measurement)
+
+clean_activities
+```
+ 
+ 
+ 
+ 
+ 
+```{r}
+write_csv(clean_activities, here("clean_data/activities_clean.csv"))
+```
+
+ 
+ 

@@ -1,0 +1,38 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+library(tidyverse)
+library(here)
+library(janitor)
+```
+
+```{r}
+activities_clean <- read_csv(here("clean_data/activities_clean.csv"))
+```
+
+
+What kind of tourism activity generates the highest income for Scotland?
+```{r}
+highest_income <- activities_clean %>% 
+  filter(breakdown_of_domestic_tourism == "Expenditure") %>% 
+  group_by(tourism_activity) %>% 
+  summarise(million_pounds = sum(value)) %>% 
+  arrange(desc(million_pounds))
+highest_income
+```
+ 
+ 
+```{r}
+highest_income %>% 
+  filter(tourism_activity != "All") %>% 
+  ggplot() +
+  aes(x = tourism_activity, y = million_pounds) +
+  geom_col() +
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+```
+ 
+

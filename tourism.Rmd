@@ -12,27 +12,61 @@ library(janitor)
 
 ```{r}
 activities_clean <- read_csv(here("clean_data/activities_clean.csv"))
+
+activities_clean %>% 
+  distinct(year) %>% 
+  arrange(year)
 ```
 
 
-What kind of tourism activity generates the highest income for Scotland?
+# Q1. What kind of tourism activity generates the highest income for Scotland?
 ```{r}
 highest_income <- activities_clean %>% 
-  filter(breakdown_of_domestic_tourism == "Expenditure") %>% 
+   filter(breakdown_of_domestic_tourism == "Expenditure", tourism_activity != "All") %>% 
   group_by(tourism_activity) %>% 
-  summarise(million_pounds = sum(value)) %>% 
-  arrange(desc(million_pounds))
-highest_income
+  summarise(expenditure_per_million_pounds  = sum(value))
+
+
+highest_income %>% 
+   slice_max(expenditure_per_million_pounds)
+
+
 ```
  
  
 ```{r}
 highest_income %>% 
-  filter(tourism_activity != "All") %>% 
-  ggplot() +
-  aes(x = tourism_activity, y = million_pounds) +
-  geom_col() +
-    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+   ggplot(aes(x = reorder(tourism_activity, -expenditure_per_million_pounds), y = expenditure_per_million_pounds)) +
+  geom_bar(stat = "identity") +
+    labs(
+       title = "the highest income for Scotland tourism from 2013 to 2019",
+           x = "tourism activity",
+           y = " per million pounds"
+  ) +
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
 ```
  
+ # Q2. Which kind of activity generates the most visits to sites?
+
+```{r}
+most_visits <- activities_clean %>% 
+   filter(breakdown_of_domestic_tourism == "Visits", tourism_activity != "All") %>% 
+  group_by(tourism_activity) %>% 
+  summarise(activity_per_million_visits  = sum(value))
+
+most_visits %>% 
+   slice_max(activity_per_million_visits)
+```
+
+```{r}
+most_visits %>% 
+   ggplot(aes(x = reorder(tourism_activity, -activity_per_million_visits), y = activity_per_million_visits)) +
+  geom_bar(stat = "identity") +
+    labs(
+      title = "most visits to sites tourism from 2013 to 2019",
+    x = "tourism activity",
+    y = " per million visits"
+  ) +
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
+```
 

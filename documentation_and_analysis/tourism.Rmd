@@ -1,8 +1,14 @@
 ---
-title: "R Notebook"
-output: html_notebook
+title: "Final Project - Visit Scotland"
+output:
+  html_document:
+    df_print: paged
 ---
 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
 
 ```{r}
 library(tidyverse)
@@ -11,8 +17,8 @@ library(janitor)
 ```
 
 ```{r}
-activities_clean <- read_csv(here("clean_data/activities_clean.csv"))
-
+activities_clean <- read_csv(here("clean_data/clean_activities.csv"))
+clean_location   <- read_csv(here("clean_data/clean_location.csv"))
 activities_clean %>% 
   distinct(year) %>% 
   arrange(year)
@@ -36,12 +42,12 @@ highest_income %>%
  
 ```{r}
 highest_income %>% 
-   ggplot(aes(x = reorder(tourism_activity, -expenditure_per_million_pounds), y = expenditure_per_million_pounds)) +
+   ggplot(aes(y = reorder(tourism_activity, -expenditure_per_million_pounds), x = expenditure_per_million_pounds)) +
   geom_bar(stat = "identity") +
     labs(
        title = "the highest income for Scotland tourism from 2013 to 2019",
-           x = "tourism activity",
-           y = " per million pounds"
+          x = " per million pounds",
+          y = "tourism activity"
   ) +
     theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
 ```
@@ -60,12 +66,61 @@ most_visits %>%
 
 ```{r}
 most_visits %>% 
-   ggplot(aes(x = reorder(tourism_activity, -activity_per_million_visits), y = activity_per_million_visits)) +
+   ggplot(aes(y = reorder(tourism_activity, -activity_per_million_visits), x = activity_per_million_visits)) +
   geom_bar(stat = "identity") +
     labs(
       title = "most visits to sites tourism from 2013 to 2019",
-    x = "tourism activity",
-    y = " per million visits"
+    y = "tourism activity",
+    x = " per million visits"
+  ) +
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
+```
+
+# Q4
+## What type of locations receive the most visits?
+```{r}
+most_visit_loca <- clean_location %>% 
+  filter(breakdown_of_domestic_tourism == "Visits", type_of_location_visited != "All areas") %>% 
+  group_by(type_of_location_visited) %>% 
+  summarise(most_visits_location = sum(value))
+
+most_visit_loca %>% 
+  slice_max(most_visits_location)
+```
+
+
+```{r}
+most_visit_loca %>% 
+   ggplot(aes(y = reorder(type_of_location_visited, -most_visits_location), x = most_visits_location)) +
+  geom_bar(stat = "identity") +
+    labs(
+       title = "locations receive the most visits from 2013 to 2019",
+          x = " per million visits",
+          y = "tourism activity"
+  ) +
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
+```
+
+## What kinds of locations do people spend the most in?
+
+```{r}
+most_spend_loca <- clean_location %>% 
+  filter(breakdown_of_domestic_tourism == "Expenditure", type_of_location_visited != "All areas") %>% 
+  group_by(type_of_location_visited) %>% 
+  summarise(most_spend_location = sum(value))
+
+most_spend_loca %>% 
+  slice_max(most_spend_location)
+```
+
+```{r}
+most_spend_loca %>% 
+   ggplot(aes(y = reorder(type_of_location_visited, -most_spend_location), x = most_spend_location)) +
+  geom_bar(stat = "identity") +
+    labs(
+       title = "locations do people spend the most in between 2013 to 2019",
+          x = " per million pounds",
+          y = "tourism activity"
   ) +
     theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
 ```

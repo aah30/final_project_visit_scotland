@@ -41,6 +41,14 @@ highest_income %>%
  
  
 ```{r}
+my_themes <-  theme(panel.grid.minor = element_blank(),
+        panel.grid.major = element_line(colour = "#A7C5CD"),
+        panel.background = element_rect(fill = "#a0a3a0"),
+        plot.background = element_rect(fill = "#a0a3a0"),
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+```
+
+```{r, fig.width= 10}
 highest_income %>% 
    ggplot(aes(y = reorder(tourism_activity, -expenditure_per_million_pounds), x = expenditure_per_million_pounds)) +
   geom_bar(stat = "identity") +
@@ -49,7 +57,7 @@ highest_income %>%
           x = " per million pounds",
           y = "tourism activity"
   ) +
-    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
+  my_themes 
 ```
  
  # Q2. Which kind of activity generates the most visits to sites?
@@ -64,7 +72,7 @@ most_visits %>%
    slice_max(activity_per_million_visits)
 ```
 
-```{r}
+```{r, fig.width= 10}
 most_visits %>% 
    ggplot(aes(y = reorder(tourism_activity, -activity_per_million_visits), x = activity_per_million_visits)) +
   geom_bar(stat = "identity") +
@@ -73,7 +81,7 @@ most_visits %>%
     y = "tourism activity",
     x = " per million visits"
   ) +
-    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
+   my_themes 
 ```
 
 # Q4
@@ -89,7 +97,7 @@ most_visit_loca %>%
 ```
 
 
-```{r}
+```{r, fig.width= 10}
 most_visit_loca %>% 
    ggplot(aes(y = reorder(type_of_location_visited, -most_visits_location), x = most_visits_location)) +
   geom_bar(stat = "identity") +
@@ -98,7 +106,7 @@ most_visit_loca %>%
           x = " per million visits",
           y = "tourism activity"
   ) +
-    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
+   my_themes
 ```
 
 ## What kinds of locations do people spend the most in?
@@ -113,7 +121,7 @@ most_spend_loca %>%
   slice_max(most_spend_location)
 ```
 
-```{r}
+```{r, fig.width= 10}
 most_spend_loca %>% 
    ggplot(aes(y = reorder(type_of_location_visited, -most_spend_location), x = most_spend_location)) +
   geom_bar(stat = "identity") +
@@ -122,6 +130,22 @@ most_spend_loca %>%
           x = " per million pounds",
           y = "tourism activity"
   ) +
-    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
+   my_themes 
+```
+
+```{r}
+clean_location %>% 
+  filter(breakdown_of_domestic_tourism == "Expenditure", type_of_location_visited != "All areas") %>% 
+  group_by(year) %>% 
+  summarise(most_spend = sum(value)) %>% 
+  ggplot(aes(x = year, y = most_spend)) +
+  geom_point() +
+   geom_line() +
+      labs(
+       title = "most spend from 2013 to 2019",
+          x = "Year",
+          y = "Expenditure"
+  ) +
+  my_themes  
 ```
 

@@ -19,6 +19,7 @@ library(janitor)
 ```{r}
 activities_clean <- read_csv(here("clean_data/clean_activities.csv"))
 clean_location   <- read_csv(here("clean_data/clean_location.csv"))
+clean_transport  <-  read_csv(here("clean_data/clean_transport.csv"))
 activities_clean %>% 
   distinct(year) %>% 
   arrange(year)
@@ -152,3 +153,25 @@ clean_location %>%
     theme(legend.title = element_blank())
 ```
 
+
+## Is there a particular method of travel our visitors arrive by?
+
+```{r}
+method_of_travel <- clean_transport %>%
+  filter(!(method_of_travel %in% c("Other","All"))) %>%
+  group_by(method_of_travel) %>%
+  summarise(total = sum(value)) %>%
+  arrange(desc(total))
+method_of_travel
+```
+
+```{r, fig.width= 10}
+method_of_travel %>% 
+   ggplot(aes(y = reorder(method_of_travel, -total), x = total)) +
+  geom_bar(stat = "identity") +
+    labs(
+       title = "method of travel our visitors arrive by from 2013 to 2019",
+          y = "method of travel"
+  )# +
+  #  my_themes
+```

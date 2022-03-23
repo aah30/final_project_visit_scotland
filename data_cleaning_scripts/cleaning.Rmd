@@ -59,7 +59,16 @@ clean_location <- location %>%
 
   clean_location  
 ```
- 
+  
+## clean names and delete feature code and measurement columns, rename data_code to year in transport dataset
+```{r}
+clean_transport <- transport %>% 
+  clean_names() %>% 
+  rename(year = date_code ) %>% 
+  select(-feature_code, -measurement)
+
+clean_transport
+```
  
 # writing clean dataset to clean data folder 
 ```{r}

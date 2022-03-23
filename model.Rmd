@@ -1,0 +1,48 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+ 
+ 
+```{r}
+library(tidyverse)
+library(here)
+library(janitor)
+library(leaps)
+```
+
+```{r}
+model_location   <- read_csv(here("clean_data/clean_location.csv"))
+model_location <- model_location %>% 
+  filter(breakdown_of_domestic_tourism == "Expenditure") %>% 
+  select(-units, -breakdown_of_domestic_tourism) %>% 
+  mutate(across(c(year, type_of_location_visited), 
+                ~as.factor(.x)))
+
+model_location
+```
+ 
+ 
+```{r}
+regsubsets_forward <- regsubsets(value ~ ., data = model_location, nvmax = 8, method = "forward")
+```
+ 
+ 
+```{r}
+summary(regsubsets_forward)
+```
+ 
+ 
+```{r}
+plot(regsubsets_forward, scale = "adjr2")
+```
+
+```{r}
+mod1 <- lm(value ~ year + type_of_location_visited, data = model_location)
+summary(mod1)
+par(mfrow = c(2, 2))
+plot(mod1)
+```
+ 
+ 

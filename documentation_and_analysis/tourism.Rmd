@@ -136,16 +136,19 @@ most_spend_loca %>%
 ```{r}
 clean_location %>% 
   filter(breakdown_of_domestic_tourism == "Expenditure", type_of_location_visited != "All areas") %>% 
-  group_by(year) %>% 
+  group_by(year,type_of_location_visited) %>% 
   summarise(most_spend = sum(value)) %>% 
-  ggplot(aes(x = year, y = most_spend)) +
+  ggplot() +
+  aes(x = year, y = most_spend, group = type_of_location_visited, colour = type_of_location_visited) +
   geom_point() +
    geom_line() +
       labs(
-       title = "most spend from 2013 to 2019",
+       title = "most spend on locations visited from 2013 to 2019",
           x = "Year",
-          y = "Expenditure"
-  ) +
-  my_themes  
+          y = "Expenditure",
+       legend.position = "yes"
+  )  +
+  my_themes +
+    theme(legend.title = element_blank())
 ```
 

@@ -60,7 +60,7 @@ clean_location <- location %>%
   clean_location  
 ```
   
-## clean names and delete feature code and measurement columns, rename data_code to year in transport dataset
+## cleaning transport dataset.
 ```{r}
 clean_transport <- transport %>% 
   clean_names() %>% 
@@ -74,6 +74,7 @@ clean_transport
 ```{r}
 write_csv(clean_activities, here("clean_data/clean_activities.csv"))
 write_csv(clean_location, here("clean_data/clean_location.csv"))
+write_csv(clean_transport, here("clean_data/clean_transport.csv"))
 ```
 
  

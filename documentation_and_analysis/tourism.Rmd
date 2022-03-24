@@ -175,3 +175,10 @@ method_of_travel %>%
   )# +
   #  my_themes
 ```
+
+
+joint the ctivities, location and transport
+```{r}
+ctivities_location <- merge(activities_clean, clean_location, all = TRUE)
+ctivities_location_trans <- merge(ctivities_location, clean_transport, all = TRUE)
+```

@@ -182,3 +182,30 @@ joint the ctivities, location and transport
 ctivities_location <- merge(activities_clean, clean_location, all = TRUE)
 ctivities_location_trans <- merge(ctivities_location, clean_transport, all = TRUE)
 ```
+
+
+## How have general tourism rates changed over time?
+
+```{r}
+ctivities_location_trans %>%
+   group_by(year) %>%
+  summarise(sum = sum(value)) %>%
+  ggplot(aes(x = year, y = sum)) +
+  geom_point() +
+  geom_line() +
+  labs(x = "Year",
+       y = "",
+       title = "Tourism rates changed between 2013-2019 by ctivities, location and transport")  
+```
+
+The general picture of the pattern, it increases until 2019, however, it declines in 2015, and increases again in 2016.
+
+
+
+
+
+
+
+
+
+

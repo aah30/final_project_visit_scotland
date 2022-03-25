@@ -23,26 +23,48 @@ model_location <- model_location %>%
 model_location
 ```
  
- 
-```{r}
-regsubsets_forward <- regsubsets(value ~ ., data = model_location, nvmax = 8, method = "forward")
-```
- 
- 
-```{r}
-summary(regsubsets_forward)
-```
- 
- 
-```{r}
-plot(regsubsets_forward, scale = "adjr2")
-```
 
+<!-- ```{r} -->
+<!-- regsubsets_forward <- regsubsets(value ~ ., data = model_location, nvmax = 8, method = "forward") -->
+<!-- ``` -->
+
+
+<!-- ```{r} -->
+<!-- summary(regsubsets_forward) -->
+<!-- ``` -->
+
+
+<!-- ```{r} -->
+<!-- plot(regsubsets_forward, scale = "adjr2") -->
+<!-- ``` -->
+
+
+
+
+build a Model_1 value ~ year and location type
 ```{r}
 mod1 <- lm(value ~ year + type_of_location_visited, data = model_location)
 summary(mod1)
+```
+ 
+```{r}
 par(mfrow = c(2, 2))
 plot(mod1)
+```
+ 
+ build a Model_2 without the Year since year not significant from model 1
+```{r}
+mod2 <- lm(value ~ type_of_location_visited, data = model_location)
+summary(mod2)
+```
+ 
+```{r}
+par(mfrow = c(2, 2))
+plot(mod2)
+```
+ 
+```{r}
+anova(mod1, mod2)
 ```
  
  

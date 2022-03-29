@@ -9,22 +9,51 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
-
+### Loading required libraries
 ```{r}
 library(tidyverse)
 library(here)
 library(janitor)
 ```
-
+ 
+ 
+ 
+### Loading the cleaned dataset
 ```{r}
 activities_clean <- read_csv(here("clean_data/clean_activities.csv"))
 clean_location   <- read_csv(here("clean_data/clean_location.csv"))
 clean_transport  <-  read_csv(here("clean_data/clean_transport.csv"))
-activities_clean %>% 
-  distinct(year) %>% 
-  arrange(year)
 ```
 
+### Work done on data cleaning
+
+- On all datasets, feature_code has been removed since it’s the only code for Scotland.
+
+- Datacode column’s name has been changed on all dataset into year as it represent the year of the visitors.
+
+- Measurement column also been removed from each dataset since we know its counting each visitor to represent these numbers.
+
+- check if any Na on all dataset.
+
+### Business questions
+There are too many business questions, I have divided the question into MPV and extensions due to time consuming
+
+**MVP**
+
+- What kind of tourism activity generates the highest income for Scotland?
+- Which kind of activity generates the most visits to sites?
+- What type of locations receive the most visits? What kinds of locations do people spend the most in?
+- Is there a particular method of travel our visitors arrive by? Some of our locations are remote and not easily accessible by public transport, so this would be good information to have.
+- How have general tourism rates changed over time?
+- Is there any way to predict spending and visits for Visit Scotland?
+
+**Extensions**
+
+- Is there a particular key demographic of visitors we should be focusing on? Who spends the most? Who visits the most?
+- When looking at regional tourism, what insights can we gain? Where are our visitors from? How do they differ in the money they spend, nights they spend in Scotland, or number of visits they do?
+- What type of accomodation is most popular? Is there a difference by location?
+
+### MVP Questions
 
 # Q1. What kind of tourism activity generates the highest income for Scotland?
 ```{r}

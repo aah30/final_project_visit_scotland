@@ -216,12 +216,15 @@ pre code {
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5saWJyYXJ5KGhlcmUpXG5saWJyYXJ5KGphbml0b3IpXG5saWJyYXJ5KGxlYXBzKVxuYGBgIn0= -->
-<pre class="r"><code>library(tidyverse)
-library(here)
-library(janitor)
-library(leaps)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShHR2FsbHkpXG5cbmBgYCJ9 -->
+<pre class="r"><code>library(GGally)
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUmVnaXN0ZXJlZCBTMyBtZXRob2Qgb3ZlcndyaXR0ZW4gYnkgJ0dHYWxseSc6XG4gIG1ldGhvZCBmcm9tICAgXG4gICsuZ2cgICBnZ3Bsb3QyXG4ifQ== -->
+<pre><code>Registered S3 method overwritten by 'GGally':
+  method from   
+  +.gg   ggplot2</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
@@ -238,15 +241,6 @@ model_location</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<!-- ```{r} -->
-<!-- regsubsets_forward <- regsubsets(value ~ ., data = model_location, nvmax = 8, method = "forward") -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- summary(regsubsets_forward) -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- plot(regsubsets_forward, scale = "adjr2") -->
-<!-- ``` -->
 <p>build a Model_1 value ~ year and location type</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
@@ -351,6 +345,7 @@ plot(mod2)</code></pre>
 <!-- rnb-plot-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>Its clear from the 2 models above that the model 2 without year is significant beter than model 1.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYW5vdmEobW9kMSwgbW9kMilcbmBgYCJ9 -->
@@ -370,8 +365,19 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibmNvbCI6NCwibnJvdyI6NTZ9LCJyZGYiOiJINHNJQUFBQUFBQUFBMzFVWFdnY1ZSUytzenV6a3l5WS9rRnAzeFliVWRCTlkvUFRWaEJ1YmFpSnJab21hUWxVU0c5Mlp6ZERabWZTMmRuVWxkU3VtSUppd1RScUtlaERsRktrRDBYVWJwK0UrK0NEanlKU1N1TkRoTDZVSXZqa1krTTljODV0YjFmc3c5M3ZuTzkrNStmZVBYY21ScVlIOHRONXhsaVcyVmFHWlIxbE11ZkUxSkhpQWNic2pISXNack51d0hlVmFJY3liSVhQS0ZRQ0JnSVhPWlpMeFlpNU5DUHlzTytRbnlHTlRXalJubXZvYlVPcjQxeks2WGI0RHEwTXJTejV0bEhMTWppemx1NVRhM1gvK2t4V3h3WGtBbS9SQytySzJwb3FrTFgzOWI4OFlOaURoajFrMk1PR3ZkK3dEeGoyd1k2S1Rpa1FkVjN3VVJzVlVVcWlXRmtQMWVxQlA0SlhPZnh0akYrV2lEOE1JdDZjUlp3dklPNWlpSitOSWdha2p6Y1FGeGNRbDlZUWIxeWxmRjhoZnY4ODRncmxQMDc1Vmw1Q0RDbmZvUmJpeFJWRVRycUkrbmlOL05PRUV4UTNSZWVvVWYxWjZtdUo4dFJwL3pyNTM3NkYrTVV5NGlkWHlMK0RlQzFHL0pyNnYxNUJ2SG9SOFF6bHZ6YUM2Rk1mSDQwanRxamVyWG5FOTM1RmJOSTVBanJuZVR3SWY1LzQ4NVIzZVpyNGZzUVBhYjk5Q2ZHRExyeUF4dzlLUHhnOXVPYlE1anFXWlN6WDBKa3g1dUE3aHE5WEZ5MzlnRnp5WFlQVEsyZGdscFpsMkpydjZsaUdEc1k3czhsd29ydG9vcnNQQlVGQnhKNm9FN0hsc0o4MDl3WWlybnFGSkRvYkVyMXRvaEdMb0ZDS0dtRVNOK3QrMmRQNlNSV3IzRUt4TU91SjB0eC82U2laODJLaWQybzY5dXBSbkJTaTJDeVNuNndKMVk3QnVDZjlJQkJWRDd2UDZ1NmY4aDdsczZ0anZhdWphdDUzcnRmYWZ4Ums5WDZ2WXRUN2VsQnJyNGVNRDdXQlozSVU2TThaZndYOFA1a2NMME9nNUx2Qi81M3h0d0h2dG5qNVRURFc1T29GQ0dqSkU3K2wrZVhTejZCbjBsTy9ZM3MyK0lzcWZlMDc1WCtNL3RpcHRKNGNnUDBYbUl5bmxQN1MzM0lZZmY3R091N3ZJMzhDNHR1TUR3TGNZZklkU0QvRytBanBqdlJpdmFrMHY1VEJQY2kzd2MrZGc0QXJ2QUs2V2ovM2h0Tno4d2J3dDdieTZtMjhoNk1RZnBUTEM5c2cwWTk4cVpqR3lmZ2JxRE1uOXdCOW1jbEp5UC9jbWp4SjkxSDdFdXNQd2Y2S2V1Yy9RVjdWWDNkNnIxS1VzYS94ZTZsZUhzYjdsOGNBWDIvSlYwSDJLZU9uL29FK3VEeTJQZVg1Y2Z3ZitQSmZhVDdlQS8zRG0zN3lNeHlLbXFjL3c3YitYamM5b1NmS1dSUkJRdy9qcnFTNTRNMUVsWmtnS29uRWo4S1pSYi91SjE1Wmk5WFkrZVdPRXQxeGRMWlBsNEZ2UVFhNjJOemMvT1YvcGk1ZkZvbm9xOFFxQkNmdmlYUnV0QUNWVmJMTURucjBackFWZHhCYkdpRVVMeGRMYzQxd3ZyZ2ZDdENqWmRTUVJSOG9iZHRZMHRhTk9mbzVlR0hWRC9WbE9JR1k5UUp5ZXRRaDB6UDJMY1IrbU9pVEtMYmVsMFNKMExwOEtRbzBnNi9xNGIva0JMZHhxQWdBQUE9PSJ9 -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["year"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["value"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["type_of_location_visited"],"name":[3],"type":["fctr"],"align":["left"]},{"label":["resid"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"2014","2":"186","3":"Seaside - beach","4":"-9.285714"},{"1":"2019","2":"1456","3":"Small town","4":"248.714286"},{"1":"2016","2":"4916","3":"All areas","4":"-191.285714"},{"1":"2018","2":"5474","3":"All areas","4":"366.714286"},{"1":"2013","2":"217","3":"Seaside - beach","4":"21.714286"},{"1":"2018","2":"6","3":"Seaside - other","4":"-48.285714"},{"1":"2018","2":"1234","3":"Small town","4":"26.714286"},{"1":"2015","2":"230","3":"Seaside resort or town","4":"-65.571429"},{"1":"2016","2":"302","3":"Seaside resort or town","4":"6.428571"},{"1":"2019","2":"359","3":"Seaside resort or town","4":"63.428571"},{"1":"2017","2":"458","3":"Seaside resort or town","4":"162.428571"},{"1":"2015","2":"3922","3":"All areas","4":"-1185.285714"},{"1":"2014","2":"5020","3":"All areas","4":"-87.285714"},{"1":"2013","2":"4647","3":"All areas","4":"-460.285714"},{"1":"2016","2":"1037","3":"Small town","4":"-170.285714"},{"1":"2013","2":"68","3":"Seaside - other","4":"13.714286"},{"1":"2013","2":"1035","3":"Small town","4":"-172.285714"},{"1":"2017","2":"246","3":"Seaside - beach","4":"50.714286"},{"1":"2019","2":"35","3":"Seaside - other","4":"-19.285714"},{"1":"2015","2":"914","3":"Small town","4":"-293.285714"},{"1":"2016","2":"32","3":"Seaside - other","4":"-22.285714"},{"1":"2016","2":"249","3":"Seaside - beach","4":"53.714286"},{"1":"2015","2":"36","3":"Seaside - other","4":"-18.285714"},{"1":"2014","2":"128","3":"Seaside - other","4":"73.714286"},{"1":"2017","2":"75","3":"Seaside - other","4":"20.714286"},{"1":"2015","2":"81","3":"Seaside - beach","4":"-114.285714"},{"1":"2019","2":"237","3":"Seaside - beach","4":"41.714286"},{"1":"2018","2":"151","3":"Seaside - beach","4":"-44.285714"},{"1":"2019","2":"457","3":"Village","4":"-82.142857"},{"1":"2015","2":"308","3":"Village","4":"-231.142857"},{"1":"2019","2":"3400","3":"City/large town","4":"471.857143"},{"1":"2018","2":"3111","3":"City/large town","4":"182.857143"},{"1":"2017","2":"1377","3":"Small town","4":"169.714286"},{"1":"2017","2":"883","3":"Village","4":"343.857143"},{"1":"2014","2":"1398","3":"Small town","4":"190.714286"},{"1":"2014","2":"2873","3":"City/large town","4":"-55.142857"},{"1":"2015","2":"2254","3":"City/large town","4":"-674.142857"},{"1":"2017","2":"3379","3":"City/large town","4":"450.857143"},{"1":"2016","2":"2630","3":"City/large town","4":"-298.142857"},{"1":"2014","2":"286","3":"Seaside resort or town","4":"-9.571429"},{"1":"2013","2":"2850","3":"City/large town","4":"-78.142857"},{"1":"2013","2":"206","3":"Seaside resort or town","4":"-89.571429"},{"1":"2017","2":"778","3":"Rural countryside","4":"236.857143"},{"1":"2016","2":"520","3":"Rural countryside","4":"-21.142857"},{"1":"2017","2":"5995","3":"All areas","4":"887.714286"},{"1":"2019","2":"429","3":"Rural countryside","4":"-112.142857"},{"1":"2015","2":"402","3":"Rural countryside","4":"-139.142857"},{"1":"2018","2":"228","3":"Seaside resort or town","4":"-67.571429"},{"1":"2018","2":"502","3":"Rural countryside","4":"-39.142857"},{"1":"2016","2":"482","3":"Village","4":"-57.142857"},{"1":"2014","2":"510","3":"Village","4":"-29.142857"},{"1":"2018","2":"651","3":"Village","4":"111.857143"},{"1":"2013","2":"483","3":"Village","4":"-56.142857"},{"1":"2014","2":"612","3":"Rural countryside","4":"70.857143"},{"1":"2019","2":"5777","3":"All areas","4":"669.714286"},{"1":"2013","2":"545","3":"Rural countryside","4":"3.857143"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[56]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIAogCmBgYHtyfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShoZXJlKQpsaWJyYXJ5KGphbml0b3IpCmxpYnJhcnkobGVhcHMpCmBgYAoKYGBge3J9Cm1vZGVsX2xvY2F0aW9uICAgPC0gcmVhZF9jc3YoaGVyZSgiY2xlYW5fZGF0YS9jbGVhbl9sb2NhdGlvbi5jc3YiKSkKbW9kZWxfbG9jYXRpb24gPC0gbW9kZWxfbG9jYXRpb24gJT4lIAogIGZpbHRlcihicmVha2Rvd25fb2ZfZG9tZXN0aWNfdG91cmlzbSA9PSAiRXhwZW5kaXR1cmUiKSAlPiUgCiAgc2VsZWN0KC11bml0cywgLWJyZWFrZG93bl9vZl9kb21lc3RpY190b3VyaXNtKSAlPiUgCiAgbXV0YXRlKGFjcm9zcyhjKHllYXIsIHR5cGVfb2ZfbG9jYXRpb25fdmlzaXRlZCksIAogICAgICAgICAgICAgICAgfmFzLmZhY3RvcigueCkpKQoKbW9kZWxfbG9jYXRpb24KYGBgCiAKCjwhLS0gYGBge3J9IC0tPgo8IS0tIHJlZ3N1YnNldHNfZm9yd2FyZCA8LSByZWdzdWJzZXRzKHZhbHVlIH4gLiwgZGF0YSA9IG1vZGVsX2xvY2F0aW9uLCBudm1heCA9IDgsIG1ldGhvZCA9ICJmb3J3YXJkIikgLS0+CjwhLS0gYGBgIC0tPgoKCjwhLS0gYGBge3J9IC0tPgo8IS0tIHN1bW1hcnkocmVnc3Vic2V0c19mb3J3YXJkKSAtLT4KPCEtLSBgYGAgLS0+CgoKPCEtLSBgYGB7cn0gLS0+CjwhLS0gcGxvdChyZWdzdWJzZXRzX2ZvcndhcmQsIHNjYWxlID0gImFkanIyIikgLS0+CjwhLS0gYGBgIC0tPgoKCgoKYnVpbGQgYSBNb2RlbF8xIHZhbHVlIH4geWVhciBhbmQgbG9jYXRpb24gdHlwZQpgYGB7cn0KbW9kMSA8LSBsbSh2YWx1ZSB+IHllYXIgKyB0eXBlX29mX2xvY2F0aW9uX3Zpc2l0ZWQsIGRhdGEgPSBtb2RlbF9sb2NhdGlvbikKc3VtbWFyeShtb2QxKQpgYGAKIApgYGB7cn0KcGFyKG1mcm93ID0gYygyLCAyKSkKcGxvdChtb2QxKQpgYGAKIAogYnVpbGQgYSBNb2RlbF8yIHdpdGhvdXQgdGhlIFllYXIgc2luY2UgeWVhciBub3Qgc2lnbmlmaWNhbnQgZnJvbSBtb2RlbCAxCmBgYHtyfQptb2QyIDwtIGxtKHZhbHVlIH4gdHlwZV9vZl9sb2NhdGlvbl92aXNpdGVkLCBkYXRhID0gbW9kZWxfbG9jYXRpb24pCnN1bW1hcnkobW9kMikKYGBgCiAKYGBge3J9CnBhcihtZnJvdyA9IGMoMiwgMikpCnBsb3QobW9kMikKYGBgCiAKYGBge3J9CmFub3ZhKG1vZDEsIG1vZDIpCmBgYAogCiA=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIAogCmBgYHtyfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShoZXJlKQpsaWJyYXJ5KGphbml0b3IpCmxpYnJhcnkobGVhcHMpCmxpYnJhcnkobW9kZWxyKQpsaWJyYXJ5KEdHYWxseSkKYGBgCgpgYGB7cn0KbW9kZWxfbG9jYXRpb24gICA8LSByZWFkX2NzdihoZXJlKCJjbGVhbl9kYXRhL2NsZWFuX2xvY2F0aW9uLmNzdiIpKQptb2RlbF9sb2NhdGlvbiA8LSBtb2RlbF9sb2NhdGlvbiAlPiUgCiAgZmlsdGVyKGJyZWFrZG93bl9vZl9kb21lc3RpY190b3VyaXNtID09ICJFeHBlbmRpdHVyZSIpICU+JSAKICBzZWxlY3QoLXVuaXRzLCAtYnJlYWtkb3duX29mX2RvbWVzdGljX3RvdXJpc20pICU+JSAKICBtdXRhdGUoYWNyb3NzKGMoeWVhciwgdHlwZV9vZl9sb2NhdGlvbl92aXNpdGVkKSwgCiAgICAgICAgICAgICAgICB+YXMuZmFjdG9yKC54KSkpCgptb2RlbF9sb2NhdGlvbgpgYGAKCgoKYnVpbGQgYSBNb2RlbF8xIHZhbHVlIH4geWVhciBhbmQgbG9jYXRpb24gdHlwZQpgYGB7cn0KbW9kMSA8LSBsbSh2YWx1ZSB+IHllYXIgKyB0eXBlX29mX2xvY2F0aW9uX3Zpc2l0ZWQsIGRhdGEgPSBtb2RlbF9sb2NhdGlvbikKc3VtbWFyeShtb2QxKQpgYGAKIApgYGB7cn0KcGFyKG1mcm93ID0gYygyLCAyKSkKcGxvdChtb2QxKQpgYGAKIAogYnVpbGQgYSBNb2RlbF8yIHdpdGhvdXQgdGhlIFllYXIgc2luY2UgeWVhciBub3Qgc2lnbmlmaWNhbnQgZnJvbSBtb2RlbCAxCmBgYHtyfQptb2QyIDwtIGxtKHZhbHVlIH4gdHlwZV9vZl9sb2NhdGlvbl92aXNpdGVkLCBkYXRhID0gbW9kZWxfbG9jYXRpb24pCnN1bW1hcnkobW9kMikKYGBgCiAKYGBge3J9CnBhcihtZnJvdyA9IGMoMiwgMikpCnBsb3QobW9kMikKYGBgCgpJdHMgY2xlYXIgZnJvbSB0aGUgMiBtb2RlbHMgYWJvdmUgdGhhdCB0aGUgbW9kZWwgMiB3aXRob3V0IHllYXIgaXMgc2lnbmlmaWNhbnQgYmV0ZXIgdGhhbiBtb2RlbCAxLgpgYGB7cn0KYW5vdmEobW9kMSwgbW9kMikKYGBgCiAKYGBge3J9CnByZXN0aWdlX3Jlc2lkIDwtIG1vZGVsX2xvY2F0aW9uICU+JQogIGFkZF9yZXNpZHVhbHMobW9kMikgIApgYGAKIAogCiAKIAog</div>
 
 
 

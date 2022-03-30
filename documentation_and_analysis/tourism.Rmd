@@ -33,7 +33,9 @@ clean_transport  <-  read_csv(here("clean_data/clean_transport.csv"))
 
 - Measurement column also been removed from each dataset since we know its counting each visitor to represent these numbers.
 
-- check if any Na on all dataset.
+- Check if any Na on all dataset.
+
+- On all plots, I removed the "All" response. Since it does not give any insight to my plots and analysis. 
 
 ### Business questions
 There are too many business questions, I have divided the question into MPV and extensions due to time consuming
@@ -70,7 +72,7 @@ highest_income %>%
 ```
  
  
-```{r}
+```{r,echo=FALSE}
 my_themes <-  theme(panel.grid.minor = element_blank(),
         panel.grid.major = element_line(colour = "#A7C5CD"),
         panel.background = element_rect(fill = "#a0a3a0"),
@@ -87,10 +89,13 @@ highest_income %>%
           x = " per million pounds",
           y = "tourism activity"
   ) +
-  my_themes 
+   theme(text = element_text(size = 18), plot.title = element_text(hjust = 0.5))  
 ```
  
- # Q2. Which kind of activity generates the most visits to sites?
+It's clear from the results above that the tourism spend their most money on restaurant by having their meal out.
+
+ 
+# Q2. Which kind of activity generates the most visits to sites?
 
 ```{r}
 most_visits <- activities_clean %>% 
@@ -111,11 +116,12 @@ most_visits %>%
     y = "tourism activity",
     x = " per million visits"
   ) +
-   my_themes 
+   theme(text = element_text(size = 18), plot.title = element_text(hjust = 0.5))  
 ```
+Visited friends or family for leisure are the top for tourism activity from the results above.
 
-# Q4
-## What type of locations receive the most visits?
+# Q3
+## 3.1 What type of locations receive the most visits?
 ```{r}
 most_visit_loca <- clean_location %>% 
   filter(breakdown_of_domestic_tourism == "Visits", type_of_location_visited != "All areas") %>% 
@@ -136,10 +142,10 @@ most_visit_loca %>%
           x = " per million visits",
           y = "tourism activity"
   ) +
-   my_themes
+   theme(text = element_text(size = 18), plot.title = element_text(hjust = 0.5))  
 ```
 
-## What kinds of locations do people spend the most in?
+## 3.2 What kinds of locations do people spend the most in?
 
 ```{r}
 most_spend_loca <- clean_location %>% 
@@ -159,10 +165,14 @@ most_spend_loca %>%
        title = "locations do people spend the most in between 2013 to 2019",
           x = " per million pounds",
           y = "tourism activity"
-  ) +
-   my_themes 
+   ) +
+   theme(text = element_text(size = 15), plot.title = element_text(hjust = 0.5))    
+ 
 ```
 
+
+
+The plot below show the pattren of the most spend on locations visited during 2013 to 2019.
 ```{r}
 clean_location %>% 
   filter(breakdown_of_domestic_tourism == "Expenditure", type_of_location_visited != "All areas") %>% 
@@ -173,17 +183,17 @@ clean_location %>%
   geom_point() +
    geom_line() +
       labs(
-       title = "most spend on locations visited from 2013 to 2019",
+       title = "Most spend on locations visited from 2013 to 2019",
           x = "Year",
           y = "Expenditure",
        legend.position = "yes"
   )  +
-  my_themes +
-    theme(legend.title = element_blank())
+   theme(text = element_text(size = 15), plot.title = element_text(hjust = 0.5), legend.title = element_blank())  
+    
 ```
 
 
-## Is there a particular method of travel our visitors arrive by?
+# Q4 Is there a particular method of travel our visitors arrive by?
 
 ```{r}
 method_of_travel <- clean_transport %>%
@@ -199,21 +209,22 @@ method_of_travel %>%
    ggplot(aes(y = reorder(method_of_travel, -total), x = total)) +
   geom_bar(stat = "identity") +
     labs(
-       title = "method of travel our visitors arrive by from 2013 to 2019",
+       title = "The method of travel used by tourism to visit different locations from 2013 to 2019",
           y = "method of travel"
-  )# +
-  #  my_themes
+  ) +
+   theme(text = element_text(size = 18), plot.title = element_text(hjust = 0.5) )  
 ```
 
 
-joint the ctivities, location and transport
+joining the activities, location and transport dataset in order to see how the rates change over the years
+
 ```{r}
 ctivities_location <- merge(activities_clean, clean_location, all = TRUE)
 ctivities_location_trans <- merge(ctivities_location, clean_transport, all = TRUE)
 ```
 
 
-## How have general tourism rates changed over time?
+# Q5 How have general tourism rates changed over time?
 
 ```{r}
 ctivities_location_trans %>%
@@ -230,8 +241,14 @@ ctivities_location_trans %>%
 The general picture of the pattern, it increases until 2019, however, it declines in 2015, and increases again in 2016.
 
 
+# Conclusions and insights
+- The most common activities for tourists in Scotland are eating out and visiting family and friends using the car as the most method of travel between different location. City and large town are the most spend  and visited locations by tourism from 2013 to 2019.
 
+- Regarding to the general tourism rates over years, we can see a sharp decline in 2015. However, since then, its increased until 2019.
 
+- Since the majority of tourism travel by cars VisitScotland can be confident that any remote locations visitors can plan and go to these places.
+
+- I advise VisitScotland that when they collect the data it would be great to have the months during the year this allow us to see the tourism activities during the year and which month is the busiest.
 
 
 

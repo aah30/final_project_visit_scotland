@@ -10,6 +10,8 @@ library(tidyverse)
 library(here)
 library(janitor)
 library(leaps)
+library(modelr)
+library(GGally)
 ```
 
 ```{r}
@@ -22,22 +24,6 @@ model_location <- model_location %>%
 
 model_location
 ```
- 
-
-<!-- ```{r} -->
-<!-- regsubsets_forward <- regsubsets(value ~ ., data = model_location, nvmax = 8, method = "forward") -->
-<!-- ``` -->
-
-
-<!-- ```{r} -->
-<!-- summary(regsubsets_forward) -->
-<!-- ``` -->
-
-
-<!-- ```{r} -->
-<!-- plot(regsubsets_forward, scale = "adjr2") -->
-<!-- ``` -->
-
 
 
 
@@ -62,9 +48,18 @@ summary(mod2)
 par(mfrow = c(2, 2))
 plot(mod2)
 ```
- 
+
+Its clear from the 2 models above that the model 2 without year is significant beter than model 1.
 ```{r}
 anova(mod1, mod2)
 ```
+ 
+```{r}
+prestige_resid <- model_location %>%
+  add_residuals(mod2)  
+```
+ 
+ 
+ 
  
  

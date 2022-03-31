@@ -204,6 +204,9 @@ method_of_travel <- clean_transport %>%
 method_of_travel
 ```
 
+The percentage of using car as method of travel 21931.8+833.3/36492.6 = 62%
+ 
+
 ```{r, fig.width= 10}
 method_of_travel %>% 
    ggplot(aes(y = reorder(method_of_travel, -total), x = total)) +

@@ -185,7 +185,7 @@ clean_location %>%
       labs(
        title = "Most spend on locations visited from 2013 to 2019",
           x = "Year",
-          y = "Expenditure",
+          y = "million £",
        legend.position = "yes"
   )  +
    theme(text = element_text(size = 15), plot.title = element_text(hjust = 0.5), legend.title = element_blank())  
@@ -237,7 +237,7 @@ ctivities_location_trans %>%
   geom_point() +
   geom_line() +
   labs(x = "Year",
-       y = "",
+       y = "million £",
        title = "Tourism rates changed between 2013-2019 by ctivities, location and transport")  
 ```
 
